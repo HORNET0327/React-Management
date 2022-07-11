@@ -14,3 +14,29 @@ yarn start
 yarn이 없으면 
 npm install -g yarn  
 으로 설치
+
+
+3)
+
+변경사항을 소스제어탭에서 확인가능
+변경사항을 반영하려면 + 버튼 클릭
+커밋을 위해 메시지란에 Create React Project  라고 쓰고 커밋버튼
+
+git 설치 후 git bash 위에서
+
+프로젝트 경로로 이동
+
+cd /c/WEB_PROJECT/MANAGEMENT
+
+유저 이메일 지정 ( 하이픈 두개 해야함)
+git config --global user.email ihornet@naver.com
+ 
+유저 네임 지정
+git config --global user.name HyeonSeok
+
+git 허브에서 만들어지 리포지토리 주소추가
+git remote add origin https://github.com/HORNET0327/React-Management.git
+ 
+깃허브로 코드 보내기
+git push --set-upstream origin master
+
