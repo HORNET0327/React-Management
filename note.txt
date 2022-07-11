@@ -1,0 +1,16 @@
+
+1)
+
+리액트 환경구축
+npm install -g create-react-app    
+
+리액트 프로젝트 폴더 생성
+create-react-app management    
+
+완료 후 
+yarn start 
+로  리액트 프로젝트가 설치되었는지 확인 가능
+
+yarn이 없으면 
+npm install -g yarn  
+으로 설치
