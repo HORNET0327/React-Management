@@ -2,6 +2,27 @@ import logo from "./logo.svg";
 import "./App.css";
 import Customer from "./components/Customer";
 
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableHeader from "@material-ui/core/TableHead";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+
+import { withStyles, WithStyles } from "@material-ui/core"; //css적용해주는 라이브러리
+
+const styles = (theme) => ({
+  root: {
+    width: "100%",
+    marginTop: theme.spacing.unit * 3,
+    overflowX: "auto",
+  },
+
+  table: {
+    minWidth: 1080,
+  },
+});
+
 export const customers = [
   {
     id: 1,
@@ -29,23 +50,39 @@ export const customers = [
   },
 ];
 
-function App() {
+function App(props) {
+  const { classes } = props;
+
   return (
-    <div>
-      {customers.map((user) => {
-        return (
-          <Customer
-            key={user.id} //키값을 설정하라고 오류가 뜨기때문에 유니크한 id를 넣어주면 된다.
-            id={user.id}
-            image={user.image}
-            name={user.name}
-            birthday={user.birthday}
-            gender={user.gender}
-            job={user.job}
-          />
-        );
-      })}
-    </div>
+    <Paper className={classes.root}>
+      <Table className={classes.table}>
+        <TableHeader>
+          <TableRow>
+            <TableCell>번호</TableCell>
+            <TableCell>이미지</TableCell>
+            <TableCell>이름</TableCell>
+            <TableCell>생년월일</TableCell>
+            <TableCell>성별</TableCell>
+            <TableCell>직업</TableCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {customers.map((user) => {
+            return (
+              <Customer
+                key={user.id} //키값을 설정하라고 오류가 뜨기때문에 유니크한 id를 넣어주면 된다.
+                id={user.id}
+                image={user.image}
+                name={user.name}
+                birthday={user.birthday}
+                gender={user.gender}
+                job={user.job}
+              />
+            );
+          })}
+        </TableBody>
+      </Table>
+    </Paper>
 
     // <Customer
     //   id={customers[0].id}
@@ -58,4 +95,5 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+export default withStyles(styles)(App);

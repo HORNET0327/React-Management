@@ -49,3 +49,23 @@ https://placeimg.com/{width}/{height}/{카테고리}/{이미지번호, 필수 �
 
 
 map을 이용해서 다수의 데이터를 뽑을때는 key값을 지정해주어야 한다.
+
+
+
+
+
+----------------------------------
+
+https://v4.mui.com/getting-started/installation/
+material ui 설치가이드
+
+
+설치 명령어
+npm install @material-ui/core
+
+안되면 yarn으로
+yarn add @material-ui/core
+
+
+
+
