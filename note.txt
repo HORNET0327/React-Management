@@ -15,7 +15,7 @@ yarn이 없으면
 npm install -g yarn  
 으로 설치
 
-
+------------------------------------------------------------
 3)
 
 변경사항을 소스제어탭에서 확인가능
@@ -40,3 +40,12 @@ git remote add origin https://github.com/HORNET0327/React-Management.git
 깃허브로 코드 보내기
 git push --set-upstream origin master
 
+
+-------------------------------------------------------------
+
+https://placeimg.com/64/64/any
+이미지를 랜덤으로 보여주는 사이트
+https://placeimg.com/{width}/{height}/{카테고리}/{이미지번호, 필수 아님}
+
+
+map을 이용해서 다수의 데이터를 뽑을때는 key값을 지정해주어야 한다.
