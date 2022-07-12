@@ -1,3 +1,5 @@
+"use strict";
+
 import logo from "./logo.svg";
 import "./App.css";
 import Customer from "./components/Customer";
@@ -10,11 +12,12 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 
 import { withStyles, WithStyles } from "@material-ui/core"; //css적용해주는 라이브러리
+import React, { Component, useEffect, useState } from "react";
 
 const styles = (theme) => ({
   root: {
     width: "100%",
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing(3),
     overflowX: "auto",
   },
 
@@ -23,34 +26,21 @@ const styles = (theme) => ({
   },
 });
 
-export const customers = [
-  {
-    id: 1,
-    image: "https://placeimg.com/64/64/any/1",
-    name: "홍길동",
-    birthday: "991112",
-    gender: "남자",
-    job: "nothing",
-  },
-  {
-    id: 2,
-    image: "https://placeimg.com/64/64/any/2",
-    name: "남",
-    birthday: "770707",
-    gender: "남자",
-    job: "nothing",
-  },
-  {
-    id: 3,
-    image: "https://placeimg.com/64/64/any/3",
-    name: "박",
-    birthday: "880808",
-    gender: "남자",
-    job: "nothing",
-  },
-];
-
 function App(props) {
+  let [customers, setCustomers] = useState();
+  let [error, setError] = useState();
+
+  useEffect(() => {
+    // const response = fetch("/api/customers");
+
+    fetch("/api/customers")
+      .then((response) => response.json())
+      .then((customers) => {
+        setCustomers(customers);
+      })
+      .catch((error) => setError(error));
+  }, []);
+
   const { classes } = props;
 
   return (
@@ -67,19 +57,21 @@ function App(props) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {customers.map((user) => {
-            return (
-              <Customer
-                key={user.id} //키값을 설정하라고 오류가 뜨기때문에 유니크한 id를 넣어주면 된다.
-                id={user.id}
-                image={user.image}
-                name={user.name}
-                birthday={user.birthday}
-                gender={user.gender}
-                job={user.job}
-              />
-            );
-          })}
+          {customers
+            ? customers.map((user) => {
+                return (
+                  <Customer
+                    key={user.id} //키값을 설정하라고 오류가 뜨기때문에 유니크한 id를 넣어주면 된다.
+                    id={user.id}
+                    image={user.image}
+                    name={user.name}
+                    birthday={user.birthday}
+                    gender={user.gender}
+                    job={user.job}
+                  />
+                );
+              })
+            : ""}
         </TableBody>
       </Table>
     </Paper>
