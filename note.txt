@@ -81,3 +81,11 @@ npm install --save body-parser
 
 
 
+//npm install --save mysql
+
+mysql 8버전 이후로 연동에 문제가 있을경우
+ALTER USER'아이디'@'%' IDENTIFIED WITH mysql_native_password BY '비번';
+
+
+
+
