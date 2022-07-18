@@ -8,6 +8,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 
+import CustomerAdd from "./components/comtomerAdd";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { withStyles, WithStyles } from "@material-ui/core"; //css적용해주는 라이브러리
@@ -38,6 +40,18 @@ function App(props) {
     setCompleted((completed) => (completed >= 100 ? 0 : completed + 1));
   };
 
+  const stateReFresh = () => {
+    setCustomers();
+    setCompleted(0);
+
+    fetch("/api/customers")
+      .then((response) => response.json())
+      .then((customers) => {
+        setCustomers(customers);
+      })
+      .catch((error) => setError(error));
+  };
+
   useEffect(() => {
     // const response = fetch("/api/customers");
 
@@ -47,63 +61,72 @@ function App(props) {
     //   setCompleted((completed) => (completed >= 100 ? 0 : completed + 1));
     // }, 80);
 
-    fetch("/api/customers")
-      .then((response) => response.json())
-      .then((customers) => {
-        setCustomers(customers);
-      })
-      .catch((error) => setError(error));
+    // callApi()
+    //   .then((customers) => {
+    //     setCustomers(customers);
+    //   })
+    //   .catch((error) => setError(error));
+    stateReFresh();
 
     // return () => {
     //   clearInterval(timer);
     // };
   }, []);
 
+  // let callApi = async () => {
+  //   const response = await fetch("/api/customers");
+  //   const body = await response.json();
+  //   return body;
+  // };
+
   const { classes } = props;
 
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHeader>
-          <TableRow>
-            <TableCell>번호</TableCell>
-            <TableCell>이미지</TableCell>
-            <TableCell>이름</TableCell>
-            <TableCell>생년월일</TableCell>
-            <TableCell>성별</TableCell>
-            <TableCell>직업</TableCell>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {customers ? (
-            customers.map((user) => {
-              return (
-                <Customer
-                  key={user.id} //키값을 설정하라고 오류가 뜨기때문에 유니크한 id를 넣어주면 된다.
-                  id={user.id}
-                  image={user.image}
-                  name={user.name}
-                  birthday={user.birthday}
-                  gender={user.gender}
-                  job={user.job}
-                />
-              );
-            })
-          ) : (
+    <div>
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHeader>
             <TableRow>
-              <TableCell colSpan="6" align="center">
-                <CircularProgress
-                  className={classes.progress}
-                  variant="determinate"
-                  value={completed}
-                />
-              </TableCell>
+              <TableCell>번호</TableCell>
+              <TableCell>이미지</TableCell>
+              <TableCell>이름</TableCell>
+              <TableCell>생년월일</TableCell>
+              <TableCell>성별</TableCell>
+              <TableCell>직업</TableCell>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </Paper>
+          </TableHeader>
+          <TableBody>
+            {customers ? (
+              customers.map((user) => {
+                return (
+                  <Customer
+                    key={user.id} //키값을 설정하라고 오류가 뜨기때문에 유니크한 id를 넣어주면 된다.
+                    id={user.id}
+                    image={user.image}
+                    name={user.name}
+                    birthday={user.birthday}
+                    gender={user.gender}
+                    job={user.job}
+                  />
+                );
+              })
+            ) : (
+              <TableRow>
+                <TableCell colSpan="6" align="center">
+                  <CircularProgress
+                    className={classes.progress}
+                    variant="determinate"
+                    value={completed}
+                  />
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </Paper>
 
+      <CustomerAdd stateReFresh={stateReFresh}></CustomerAdd>
+    </div>
     // <Customer
     //   id={customers[0].id}
     //   image={customers[0].image}
