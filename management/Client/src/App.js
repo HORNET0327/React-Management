@@ -93,6 +93,7 @@ function App(props) {
               <TableCell>생년월일</TableCell>
               <TableCell>성별</TableCell>
               <TableCell>직업</TableCell>
+              <TableCell>설정</TableCell>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -100,6 +101,7 @@ function App(props) {
               customers.map((user) => {
                 return (
                   <Customer
+                    stateReFresh={stateReFresh}
                     key={user.id} //키값을 설정하라고 오류가 뜨기때문에 유니크한 id를 넣어주면 된다.
                     id={user.id}
                     image={user.image}
