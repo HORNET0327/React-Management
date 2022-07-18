@@ -44,12 +44,12 @@ function CustomerAdd(props) {
 
     addCustomer()
       .then((response) => {
-        console.log(response.data);
-
         props.stateReFresh();
 
         setuserFile();
         setuserForm("");
+
+        setuserAddOpen(false);
       })
       .then((error) => {
         console.log(error);
@@ -58,13 +58,6 @@ function CustomerAdd(props) {
 
   const addCustomer = async () => {
     let url = "/api/customers";
-
-    console.log(userFile);
-    // console.log(userForm.file);
-    console.log(userForm.userName);
-    console.log(userForm.birthday);
-    console.log(userForm.gender);
-    console.log(userForm.job);
 
     let formData = new FormData();
     // formData.append("image", userForm.file);
@@ -79,7 +72,6 @@ function CustomerAdd(props) {
         "Content-Type": `multipart/form-data`,
       },
     };
-    console.log(formData);
 
     return post.post(url, formData, config);
   };
@@ -94,12 +86,15 @@ function CustomerAdd(props) {
   };
 
   const handleClickOpen = () => {
+    console.log(userAddOpen);
     setuserAddOpen(true);
   };
 
   const handleClickClose = () => {
+    console.log(userAddOpen);
     setuserFile();
     setuserForm("");
+
     setuserAddOpen(false);
   };
 
@@ -132,7 +127,7 @@ function CustomerAdd(props) {
               component="span"
               name="file"
             >
-              {userForm.fileName === undefined
+              {userForm.fileName === "" || userForm.fileName === undefined
                 ? "프로필 이미지 선택"
                 : userForm.fileName}
             </Button>

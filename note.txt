@@ -102,3 +102,11 @@ npm install --save multer
 
 
 
+아이콘을 사용하기 위한 라이브러리 추가
+npm install --save @material-ui/icons
+
+client 에 설치하려니 에러가 났다
+npm ERR! Fix the upstream dependency conflict, or retry
+npm ERR! this command with --force, or --legacy-peer-deps
+
+npm install --save @material-ui/icons 뒤에    --legacy-peer-deps 를 붙여주니 해결됬다
